@@ -113,8 +113,8 @@
     if ([UIApplication sharedApplication].statusBarOrientation != UIInterfaceOrientationPortrait) {
         UIViewController *viewController = [[UIViewController alloc] init];
         if ([AppDelegate isLegacySystem]) {
-            [self.navigationController presentModalViewController:viewController animated:NO];
-            [self.navigationController dismissModalViewControllerAnimated:NO];
+            [self.navigationController presentViewController:viewController animated:NO completion:nil];
+            [self.navigationController dismissViewControllerAnimated:NO completion:nil];
         } else {
             viewController.view.backgroundColor = [UIColor blackColor];
             [self.navigationController presentViewController:viewController animated:NO completion:^{

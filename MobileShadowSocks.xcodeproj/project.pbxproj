@@ -386,6 +386,11 @@
 			attributes = {
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Linus Yang";
+				TargetAttributes = {
+					4B3A810816BA4A2C00BE1B4C = {
+						DevelopmentTeam = R2AR84FYFZ;
+					};
+				};
 			};
 			buildConfigurationList = 4B3A810316BA4A2C00BE1B4C /* Build configuration list for PBXProject "MobileShadowSocks" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -606,6 +611,7 @@
 		4B3A812216BA4A2C00BE1B4C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobileShadowSocks/MobileShadowSocks-Prefix.pch";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
@@ -615,7 +621,7 @@
 					"./zxing-objc/**",
 				);
 				INFOPLIST_FILE = "MobileShadowSocks/MobileShadowSocks-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.linusyang.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ralphstudio.shadowsocksclient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -624,6 +630,7 @@
 		4B3A812316BA4A2C00BE1B4C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobileShadowSocks/MobileShadowSocks-Prefix.pch";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
@@ -633,7 +640,7 @@
 					"./zxing-objc/**",
 				);
 				INFOPLIST_FILE = "MobileShadowSocks/MobileShadowSocks-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.linusyang.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ralphstudio.shadowsocksclient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
