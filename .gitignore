@@ -13,4 +13,7 @@ perapp-plugin/*.deb
 OpenSSL-for-iPhone/
 shadowsocks-libev/
 MobileShadowSocks/UIAlertView-Blocks/
-libsodium-ios/
+
+libsodium-ios/libsodium/
+libsodium-ios/libsodium.xcodeproj/xcuserdata/
+libsodium-ios/libsodium.xcodeproj/project.xcworkspace 
