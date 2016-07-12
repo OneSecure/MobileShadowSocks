@@ -16,4 +16,8 @@ MobileShadowSocks/UIAlertView-Blocks/
 
 libsodium-ios/libsodium/
 libsodium-ios/libsodium.xcodeproj/xcuserdata/
-libsodium-ios/libsodium.xcodeproj/project.xcworkspace 
+libsodium-ios/libsodium.xcodeproj/project.xcworkspace/
+
+shadowsocks.xcodeproj/xcuserdata/
+shadowsocks.xcodeproj/project.xcworkspace/
+
