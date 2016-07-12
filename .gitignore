@@ -9,3 +9,8 @@ shadowd
 perapp-plugin/theos
 perapp-plugin/.theos
 perapp-plugin/*.deb
+
+OpenSSL-for-iPhone/
+shadowsocks-libev/
+MobileShadowSocks/UIAlertView-Blocks/
+libsodium-ios/
