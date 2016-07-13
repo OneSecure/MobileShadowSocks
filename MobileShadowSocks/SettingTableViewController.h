@@ -30,7 +30,6 @@
     NSArray *_tableSectionTitle;
     NSArray *_tableElements;
     NSString *_pacDefaultFile;
-    BOOL _isBuggyPhotoPicker;
 }
 
 - (void)fixProxy;

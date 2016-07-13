@@ -10,13 +10,8 @@
 #import "SettingTableViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate> {
-    UINavigationController *_navController;
-    SettingTableViewController *_tabViewController;
 }
 
 @property (nonatomic, retain) UIWindow *window;
-
-+ (BOOL)isLegacySystem;
-+ (BOOL)isScottForstall;
 
 @end

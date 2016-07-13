@@ -11,7 +11,6 @@
 #import "ProfileViewController.h"
 #import "CodeGeneratorViewController.h"
 #import "NSString+Base64.h"
-#import "ImagePickerViewController.h"
 #import "ProxyManager.h"
 #import "ProfileManager.h"
 #import "UIAlertView+TextField.h"
@@ -130,7 +129,6 @@ typedef enum {
 {
     self = [super initWithStyle:style];
     if (self) {
-        _isBuggyPhotoPicker = !DEVICE_IS_IPAD() && SYSTEM_VERSION_LESS_THAN(@"7.0") && !SYSTEM_VERSION_LESS_THAN(@"6.0");
         _pacDefaultFile = [[NSString alloc] initWithFormat:@"%@/%@", [[NSBundle mainBundle] bundlePath], PAC_DEFAULT_NAME];
         _proxyManager = [[ProxyManager alloc] init];
         _proxyManager.delegate = self;
@@ -387,9 +385,6 @@ typedef enum {
         if ([cellType hasPrefix:CELL_TEXT]) {
             UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, _cellWidth, 24)];
             textField.userInfo = cellKey;
-            if ([AppDelegate isScottForstall]) {
-                [textField setTextColor:kgrayBlueColor];
-            }
             [textField setPlaceholder:cellDefaultValue];
             if ([cellType hasSuffix:CELL_NUM])
                 [textField setKeyboardType:UIKeyboardTypePhonePad];
@@ -717,11 +712,7 @@ typedef enum {
         case QRCodeActionLibrary: {
             if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
                 UIImagePickerController *pickerController;
-                if (_isBuggyPhotoPicker) {
-                    pickerController = [[ImagePickerViewController alloc] init];
-                } else {
-                    pickerController = [[UIImagePickerController alloc] init];
-                }
+                pickerController = [[UIImagePickerController alloc] init];
                 pickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
                 pickerController.delegate = self;
                 if (DEVICE_IS_IPAD()) {
@@ -821,11 +812,7 @@ typedef enum {
 - (void)setPacFileCell:(UITableViewCell *)cell enabled:(BOOL)isEnabled
 {
     UIColor *textColor;
-    if ([AppDelegate isScottForstall]) {
-        textColor = isEnabled ? kgrayBlueColor : kgrayBlueColorDisabled;
-    } else {
-        textColor = isEnabled ? kblackColor : kblackColorDisabled;
-    }
+    textColor = isEnabled ? kblackColor : kblackColorDisabled;
     if ([self useLibFinder]) {
         cell.detailTextLabel.textColor = textColor;
     } else {

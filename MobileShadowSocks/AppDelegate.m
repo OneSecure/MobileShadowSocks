@@ -8,29 +8,11 @@
 
 #import "AppDelegate.h"
 
-@implementation AppDelegate
+@implementation AppDelegate {
+    SettingTableViewController *_tabViewController;
+}
 
 @synthesize window = _window;
-
-+ (BOOL)isLegacySystem
-{
-    static BOOL isLegacySystem = NO;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        isLegacySystem = SYSTEM_VERSION_LESS_THAN(@"5.0");
-    });
-    return isLegacySystem;
-}
-
-+ (BOOL)isScottForstall
-{
-    static BOOL isScott = NO;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        isScott = SYSTEM_VERSION_LESS_THAN(@"7.0");
-    });
-    return isScott;
-}
 
 - (void)dealloc
 {
@@ -38,14 +20,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    if (!SYSTEM_VERSION_LESS_THAN(@"8.0")) {
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge categories:nil];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-    }
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     _tabViewController = [[SettingTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    _navController = [[UINavigationController alloc] initWithRootViewController:_tabViewController];
-    [self.window setRootViewController:_navController];
+    UINavigationController *navController =
+    [[UINavigationController alloc] initWithRootViewController:_tabViewController];
+    [self.window setRootViewController:navController];
     [self.window makeKeyAndVisible];
     return YES;
 }

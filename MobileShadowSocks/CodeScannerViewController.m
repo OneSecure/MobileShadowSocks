@@ -107,21 +107,16 @@
     /* Portrait Orientation Workaround */
     if ([UIApplication sharedApplication].statusBarOrientation != UIInterfaceOrientationPortrait) {
         UIViewController *viewController = [[UIViewController alloc] init];
-        if ([AppDelegate isLegacySystem]) {
-            [self.navigationController presentViewController:viewController animated:NO completion:nil];
-            [self.navigationController dismissViewControllerAnimated:NO completion:nil];
-        } else {
-            viewController.view.backgroundColor = [UIColor blackColor];
-            [self.navigationController presentViewController:viewController animated:NO completion:^{
-                double delayInSeconds = 0.2;
-                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-                });
-            }];
-        }
+        viewController.view.backgroundColor = [UIColor blackColor];
+        [self.navigationController presentViewController:viewController animated:NO completion:^{
+            double delayInSeconds = 0.2;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            });
+        }];
     }
-    
+
     _capture = [[ZXCapture alloc] init];
     self.capture.rotation = 90.0f;
     self.capture.camera = self.capture.back;
