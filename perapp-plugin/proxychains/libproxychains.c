@@ -438,10 +438,11 @@ static int custom_getnameinfo(const struct sockaddr *sa,
 }
 
 #if (defined __linux__) || (defined __APPLE__)
-static struct hostent *custom_gethostbyaddr(const void *addr, socklen_t len, int type) {
+static struct hostent *custom_gethostbyaddr(const void *addr, socklen_t len, int type)
 #else
-static struct hostent *custom_gethostbyaddr(const char *addr, socklen_t len, int type) {
+static struct hostent *custom_gethostbyaddr(const char *addr, socklen_t len, int type)
 #endif
+{
     static char buf[16];
     static char ipv4[4];
     static char *list[2];
@@ -451,9 +452,9 @@ static struct hostent *custom_gethostbyaddr(const char *addr, socklen_t len, int
 
     PDEBUG("TODO: proper gethostbyaddr hook\n");
 
-    if(!proxychains_resolver)
+    if(!proxychains_resolver) {
         return true_gethostbyaddr(addr, len, type);
-    else {
+    } else {
 
         PDEBUG("len %u\n", len);
         if(len != 4)
