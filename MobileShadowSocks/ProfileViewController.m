@@ -79,7 +79,7 @@
     static NSString *cellIdentifier = @"ProfileTableViewCellIdentifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         [[cell textLabel] setAdjustsFontSizeToFitWidth:YES];
     }
     [[cell textLabel] setText:[[ProfileManager sharedProfileManager] nameOfProfile:[indexPath row] - 1]];
@@ -146,7 +146,6 @@
     [[self tableView] setEditing:YES animated:YES];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", nil) style:UIBarButtonItemStyleDone target:self action:@selector(exitEditMode)];
     [[self navigationItem] setRightBarButtonItem:doneButton];
-    [doneButton release];
 }
 
 - (void)exitEditMode
@@ -154,7 +153,6 @@
     [[self tableView] setEditing:NO animated:YES];
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Edit", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(enterEditMode)];
     [[self navigationItem] setRightBarButtonItem:editButton];
-    [editButton release];
 }
 
 #pragma mark - Table view delegate
@@ -177,7 +175,6 @@
             [textField setClearButtonMode:UITextFieldViewModeWhileEditing];
             [alert setTag:[indexPath row] - 1];
             [alert show];
-            [alert release];
         }
     } else if ([indexPath row] != _selectedIndex) {
         [self checkRow:[indexPath row]];

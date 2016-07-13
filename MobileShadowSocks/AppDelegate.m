@@ -34,10 +34,6 @@
 
 - (void)dealloc
 {
-    [_window release];
-    [_navController release];
-    [_tabViewController release];
-    [super dealloc];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -46,7 +42,7 @@
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     }
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     _tabViewController = [[SettingTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     _navController = [[UINavigationController alloc] initWithRootViewController:_tabViewController];
     [self.window setRootViewController:_navController];

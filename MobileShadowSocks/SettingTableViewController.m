@@ -228,14 +228,11 @@ typedef enum {
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     gestureRecognizer.cancelsTouchesInView = NO;
     [self.tableView addGestureRecognizer:gestureRecognizer];
-    [gestureRecognizer release];
     UIBarButtonItem *repairButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Repair", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(repairDaemon)];
     UIBarButtonItem *aboutButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"About", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(showAbout)];
     [[self navigationItem] setLeftBarButtonItem:repairButton];
     [[self navigationItem] setRightBarButtonItem:aboutButton];
     [[self navigationItem] setTitle:NSLocalizedString(@"ShadowSocks", nil)];
-    [repairButton release];
-    [aboutButton release];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -262,14 +259,6 @@ typedef enum {
 
 - (void)dealloc
 {
-    [_tableSectionTitle release];
-    [_tableElements release];
-    [_pacDefaultFile release];
-    [_popController release];
-    _popController = nil;
-    [_proxyManager release];
-    _proxyManager = nil;
-    [super dealloc];
 }
 
 #pragma mark - Table view data source
@@ -322,7 +311,6 @@ typedef enum {
                                   nil];
             [alert setTag:kAlertViewTagDefaultPac];
             [alert show];
-            [alert release];
         } else if ([cellKey isEqualToString:@"NEW_PROFILE_BUTTON"]) {
             [self showNewProfile:nil withMessage:nil];
         } else if ([cellKey isEqualToString:@"QRCODE_BUTTON"]) {
@@ -337,21 +325,17 @@ typedef enum {
                                           nil];
             [actionSheet setTag:kActionSheetQRCode];
             [actionSheet showInView:self.view];
-            [actionSheet release];
         }
     } else if ([cellType hasPrefix:CELL_VIEW]) {
         if ([cellKey isEqualToString:kProfileCrypto]) {
             CipherViewController *cipherViewController = [[CipherViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [self.navigationController pushViewController:cipherViewController animated:YES];
-            [cipherViewController release];
         } else if ([cellKey isEqualToString:GLOBAL_PROFILE_NOW_KEY]) {
             ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [self.navigationController pushViewController:profileViewController animated:YES];
-            [profileViewController release];
         } else if ([cellKey isEqualToString:kProfilePerApp]) {
             UIViewController *viewController = [[PerAppStubViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [self.navigationController pushViewController:viewController animated:YES];
-            [viewController release];
         } else if ([cellKey isEqualToString:kProfilePac]) {
             UIViewController *finderController = [self allocFinderController];
             if (finderController != nil) {
@@ -359,12 +343,10 @@ typedef enum {
                     UIPopoverController *popController = [[UIPopoverController alloc] initWithContentViewController:finderController];
                     popController.delegate = self;
                     self.popController = popController;
-                    [popController release];
                     [self showPopController];
                 } else {
                     [self presentViewController:finderController animated:YES completion:nil];
                 }
-                [finderController release];
             }
         }
     }
@@ -376,7 +358,7 @@ typedef enum {
     NSArray *tableSection = [_tableElements objectAtIndex:[indexPath section]];
     NSArray *tableCell = [tableSection objectAtIndex:[indexPath row]];
     if ([tableCell count] < CELL_INDEX_NUM) {
-        return [[[UITableViewCell alloc] init] autorelease];
+        return [[UITableViewCell alloc] init];
     }
     
     NSString *cellTitle = (NSString *) [tableCell objectAtIndex:CELL_INDEX_TITLE];
@@ -396,7 +378,7 @@ typedef enum {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         UITableViewCellStyle cellStyle = [cellType hasPrefix:CELL_VIEW] ? UITableViewCellStyleValue1 : UITableViewCellStyleDefault;
-        cell = [[[UITableViewCell alloc] initWithStyle:cellStyle reuseIdentifier:cellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
         [[cell textLabel] setText:cellTitle];
         [[cell textLabel] setAdjustsFontSizeToFitWidth:YES];
         [[cell textLabel] setTextColor:kblackColor];
@@ -421,7 +403,6 @@ typedef enum {
             [textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
             [cell setAccessoryView:textField];
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            [textField release];
         }
         else if ([cellType hasPrefix:CELL_SWITCH]) {
             UISwitch *switcher = [[UISwitch alloc] initWithFrame:CGRectZero];
@@ -433,7 +414,6 @@ typedef enum {
             }
             [cell setAccessoryView:switcher];
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            [switcher release];
         }
         else if ([cellType hasPrefix:CELL_BUTTON]) {
 #ifdef __IPHONE_6_0
@@ -487,14 +467,12 @@ typedef enum {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"About", nil) message:aboutMessage delegate:self cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:NSLocalizedString(@"Help Page",nil), NSLocalizedString(@"Public Accounts",nil), nil];
     [alert setTag:kAlertViewTagAbout];
     [alert show];
-    [alert release];
 }
 
 - (void)showError:(NSString *)error
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:error ? error : NSLocalizedString(@"Operation failed.\nPlease try again later.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil, nil];
     [alert show];
-    [alert release];
 }
 
 - (void)checkFileNotFound
@@ -503,7 +481,6 @@ typedef enum {
     if ([pacFile length] > 0 && ![[NSFileManager defaultManager] fileExistsAtPath:pacFile]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:NSLocalizedString(@"PAC file not found. Redirect all traffic to proxy.", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil, nil];
         [alert show];
-        [alert release];
     }
 }
 
@@ -516,7 +493,6 @@ typedef enum {
                                           otherButtonTitles:NSLocalizedString(@"Repair",nil), nil];
     [alert setTag:kAlertViewTagRepair];
     [alert show];
-    [alert release];
 }
 
 - (void)showNewProfile:(NSDictionary *)profileInfo withMessage:(NSString *)message
@@ -543,7 +519,6 @@ typedef enum {
         [textField setText:presetName];
     }
     [alert show];
-    [alert release];
 }
 
 - (void)showQRCodeError:(NSString *)rawLink
@@ -568,7 +543,6 @@ typedef enum {
     [alert setTag:kAlertViewTagScanError];
     alert.userInfo = rawLink;
     [alert show];
-    [alert release];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -737,7 +711,6 @@ typedef enum {
             CodeScannerViewController *scannerViewController = [[CodeScannerViewController alloc] init];
             scannerViewController.delegate = self;
             [self.navigationController pushViewController:scannerViewController animated:YES];
-            [scannerViewController release];
             break;
         }
             
@@ -755,12 +728,10 @@ typedef enum {
                     UIPopoverController *popController = [[UIPopoverController alloc] initWithContentViewController:pickerController];
                     popController.delegate = self;
                     self.popController = popController;
-                    [popController release];
                     [self showPopController];
                 } else {
                     [self presentViewController:pickerController animated:YES completion:nil];
                 }
-                [pickerController release];
             } else {
                 [self showError:NSLocalizedString(@"Photo library is not available.", nil)];
             }
@@ -776,7 +747,6 @@ typedef enum {
             NSString *encodedLink = [NSString stringWithFormat:@"%@%@", kURLPrefix, [rawLink base64EncodedString]];
             CodeGeneratorViewController *genViewController = [[CodeGeneratorViewController alloc] initWithQRCodeLink:encodedLink];
             [self.navigationController pushViewController:genViewController animated:YES];
-            [genViewController release];
             break;
         }
             

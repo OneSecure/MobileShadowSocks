@@ -18,7 +18,7 @@
     static NSArray *cipherArray = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        cipherArray = [[NSArray alloc] initWithArray:@[kCipherDefault,
+        cipherArray = @[kCipherDefault,
                                                       @"rc4",
                                                       @"rc4-md5",
                                                       @"aes-128-cfb",
@@ -30,7 +30,7 @@
                                                       @"camellia-256-cfb",
                                                       @"cast5-cfb",
                                                       @"des-cfb",
-                                                      @"rc2-cfb"]];
+                                                      @"rc2-cfb"];
     });
     return cipherArray;
 }
@@ -40,7 +40,7 @@
     static NSArray *cipherNameArray = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        cipherNameArray = [[NSArray alloc] initWithArray:@[NSLocalizedString(@"Table (Default)", nil),
+        cipherNameArray = @[NSLocalizedString(@"Table (Default)", nil),
                                                            NSLocalizedString(@"RC4", nil),
                                                            NSLocalizedString(@"RC4 (MD5)", nil),
                                                            NSLocalizedString(@"AES 128-bit", nil),
@@ -52,7 +52,7 @@
                                                            NSLocalizedString(@"Camellia 256-bit", nil),
                                                            NSLocalizedString(@"CAST5", nil),
                                                            NSLocalizedString(@"DES", nil),
-                                                           NSLocalizedString(@"RC2", nil)]];
+                                                           NSLocalizedString(@"RC2", nil)];
     });
     return cipherNameArray;
 }
@@ -128,7 +128,7 @@
     static NSString *cellIdentifier = @"CipherTableViewCellIdentifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         [[cell textLabel] setAdjustsFontSizeToFitWidth:YES];
     }
     [[cell textLabel] setText:[[CipherViewController cipherNameArray] objectAtIndex:[indexPath row]]];

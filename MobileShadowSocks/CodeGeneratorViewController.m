@@ -67,8 +67,7 @@ typedef enum {
                                                                    target:self
                                                                    action:@selector(shareCodeImage)];
     self.navigationItem.rightBarButtonItem = shareButton;
-    [shareButton release];
-    
+
     [self generateQRCode];
 }
 
@@ -89,11 +88,6 @@ typedef enum {
 
 - (void)dealloc
 {
-    [_codeLink release];
-    _codeLink = nil;
-    [_codeImageView release];
-    _codeImageView = nil;
-    [super dealloc];
 }
 
 #pragma mark - Private methods
@@ -106,7 +100,6 @@ typedef enum {
                                           cancelButtonTitle:NSLocalizedString(@"OK",nil)
                                           otherButtonTitles:nil];
     [alert show];
-    [alert release];
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *) contextInfo;
@@ -146,7 +139,6 @@ typedef enum {
                                   NSLocalizedString(@"Share to Weibo", nil),
                                   nil];
     [actionSheet showInView:self.view];
-    [actionSheet release];
 }
 
 #pragma mark - UIActionSheet Delegate
@@ -206,7 +198,6 @@ typedef enum {
                     }
                     [composeViewController setInitialText:NSLocalizedString(@"I've shared a #ShadowSocks profile with QR Code.", nil)];
                     [self presentViewController:composeViewController animated:YES completion:nil];
-                    [composeViewController release];
 #endif
                 } else {
 #ifdef __IPHONE_6_0

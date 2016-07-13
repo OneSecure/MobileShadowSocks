@@ -642,6 +642,7 @@
 		4B3A812216BA4A2C00BE1B4C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobileShadowSocks/MobileShadowSocks-Prefix.pch";
@@ -662,6 +663,7 @@
 		4B3A812316BA4A2C00BE1B4C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobileShadowSocks/MobileShadowSocks-Prefix.pch";

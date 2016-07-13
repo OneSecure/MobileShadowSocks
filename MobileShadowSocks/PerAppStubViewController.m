@@ -70,7 +70,7 @@
     static NSString *cellIdentifier = @"PerAppTableViewCellIdentifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         [[cell textLabel] setAdjustsFontSizeToFitWidth:YES];
     }
     if (!self.hasPerApp) {

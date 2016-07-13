@@ -222,7 +222,7 @@ int base64_decode( unsigned char *dst, size_t *dlen,
         
         if (ret == 0 && outputLength > 0) {
             outputData.length = outputLength;
-            return [[[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding] autorelease];
+            return [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
         }
     } while (0);
     return nil;

@@ -45,8 +45,6 @@ typedef enum {
 
 - (void)dealloc
 {
-    _delegate = nil;
-    [super dealloc];
 }
 
 #pragma mark - Private methods
@@ -177,7 +175,7 @@ typedef enum {
             continue;
         }
         
-        NSString *str = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+        NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         
         // Parse response
         if ([str hasPrefix:RESPONSE_SUCC]) {
@@ -198,10 +196,10 @@ typedef enum {
     CFDictionaryRef proxyDict = CFNetworkCopySystemProxySettings();
     
     // Check if pac auto proxy enabled
-    BOOL pacEnabled = [[(NSDictionary *) proxyDict objectForKey:@"ProxyAutoConfigEnable"] boolValue];
+    BOOL pacEnabled = [[(__bridge NSDictionary *) proxyDict objectForKey:@"ProxyAutoConfigEnable"] boolValue];
     
     // Check if socks proxy enabled
-    BOOL socksEnabled = [[(NSDictionary *) proxyDict objectForKey:@"SOCKSEnable"] boolValue];
+    BOOL socksEnabled = [[(__bridge NSDictionary *) proxyDict objectForKey:@"SOCKSEnable"] boolValue];
     
     // Determine current proxy operation
     ProxyOperation currentOp = kProxyOperationDisableProxy;

@@ -36,9 +36,6 @@
 
 - (void)dealloc
 {
-    [_animateColor release];
-    _animateColor = nil;
-    [super dealloc];
 }
 
 - (UIColor *)lighterColorForColor:(UIColor *)color
@@ -98,8 +95,6 @@
                 handler(NO, nil);
             }
         });
-        
-        [source release];
     });
 }
 
@@ -125,7 +120,6 @@
                 });
             }];
         }
-        [viewController release];
     }
     
     _capture = [[ZXCapture alloc] init];
@@ -145,7 +139,6 @@
                                                                        target:self
                                                                        action:@selector(toggleTorch)];
         self.navigationItem.rightBarButtonItem = torchButton;
-        [torchButton release];
     }
     
     _cameraView = [[UIView alloc] initWithFrame:self.view.bounds];
@@ -173,9 +166,6 @@
     tapGesture.numberOfTapsRequired = 1;
     [tapGesture requireGestureRecognizerToFail:doubleTapGesture];
     [self.cameraView addGestureRecognizer:tapGesture];
-    
-    [doubleTapGesture release];
-    [tapGesture release];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -227,13 +217,6 @@
 
 - (void)dealloc
 {
-    [_capture release];
-    _capture = nil;
-    [_cameraView release];
-    _cameraView = nil;
-    [_focusSqure release];
-    _focusSqure = nil;
-    [super dealloc];
 }
 
 #pragma mark - Private Methods
@@ -253,7 +236,6 @@
                                           cancelButtonTitle:NSLocalizedString(@"OK",nil)
                                           otherButtonTitles:nil];
     [alert show];
-    [alert release];
 }
 
 #if !TARGET_IPHONE_SIMULATOR

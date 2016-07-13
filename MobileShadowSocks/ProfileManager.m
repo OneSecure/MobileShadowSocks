@@ -38,9 +38,6 @@ SINGLETON_FOR_CLASS(ProfileManager)
 
 - (void)dealloc
 {
-    [_configPath release];
-    _configPath = nil;
-    [super dealloc];
 }
 
 #pragma mark - Profile read settings
