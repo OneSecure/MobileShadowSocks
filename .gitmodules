@@ -7,6 +7,6 @@
 [submodule "OpenSSL-for-iPhone"]
 	path = OpenSSL-for-iPhone
 	url = https://github.com/clowwindy/OpenSSL-for-iPhone.git
-[submodule "libsodium"]
+[submodule "libsodium-ios/libsodium"]
 	path = libsodium-ios/libsodium
 	url = https://github.com/jedisct1/libsodium.git
